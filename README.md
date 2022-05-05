@@ -29,7 +29,7 @@
 ## 使用方法
 
 ```
-scoop bucket add apps https://github.com/kkzzhizhou/scoop-apps
+scoop bucket add apps https://github.com/AUGUSTDzw/scoop-apps.git
 ```
 
 ## FAQ
