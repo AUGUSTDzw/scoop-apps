@@ -24,4 +24,4 @@ jobs:
         timeout: 600 # git 命令超时时间
         debug: true # 测试用，正常可以关掉
         force_update: true # 强制推送到 dst 仓库
-        white_list: "test2,community.applications" # 白名单机制，可以用于更新某些指定库
+        white_list: "scoop-apps" # 白名单机制，可以用于更新某些指定库
