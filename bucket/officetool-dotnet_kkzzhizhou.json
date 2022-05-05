@@ -1,0 +1,27 @@
+{
+    "homepage": "https://dotnet.microsoft.com/",
+    "description": "The dotnet desktop runtime enables you to run dotnet desktop applications. This release includes the .NET Core Runtime, you do not need to install it separately.",
+    "version": "6.0.4",
+    "license": "MIT",
+    "url": "https://dotnetcli.blob.core.windows.net/dotnet/WindowsDesktop/6.0.4/windowsdesktop-runtime-6.0.4-win-x86.exe#/setup.exe",
+    "hash": "sha512:e3e52096d09782b35d6dfe15c8ed8eed978d7def198696f2e6f3ce7c83e7526b5e74955de2ca68ae94bbbd6c1d01d4faf2f4a5252c1e7c99b0746e2716a0a8e5",
+    "depends": "dark",
+    "installer": {
+        "script": "Start-Process -Wait \"$dir\\setup.exe\" \"/install /quiet /norestart\" -Verb RunAs"
+    },
+    "uninstaller": {
+        "script": "Start-Process -Wait \"$dir\\setup.exe\" \"/uninstall /quiet /norestart\" -Verb RunAs"
+    },
+    "checkver": {
+        "url": "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/releases-index.json",
+        "regex": "(?s)(?<version>[\\d.]+)[^\\d]*?(?<sdkversion>[\\d.]+)[^\\d]*?(?:current|lts)"
+    },
+    "autoupdate": {
+        "url": "https://dotnetcli.blob.core.windows.net/dotnet/WindowsDesktop/$version/windowsdesktop-runtime-$version-win-x86.exe#/setup.exe",
+        "hash": {
+            "url": "https://dotnetcli.blob.core.windows.net/dotnet/checksums/$version-sha.txt",
+            "mode": "extract"
+        }
+    },
+    "notes": "This package only for office tool."
+}
