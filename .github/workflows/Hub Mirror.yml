@@ -1,0 +1,27 @@
+name: Gitee repos mirror periodic job
+
+on:
+  push: # 有 push 代码的时候会执行
+    branches: [ master ]
+  pull_request: # 有 pull_request 代码的时候会执行
+    branches: [ master ]
+  schedule: 
+    # 每3个小时跑一次
+    - cron:  '0 */3 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Mirror the Github organization repos to Gitee.
+      uses: Yikun/hub-mirror-action@v1.0
+      with:
+        src: github/ZhaoUncle # 必选，需要同步的Github用户（源）
+        dst: gitee/qingfeng689 # 必选，需要同步到的Gitee的用户（目的）
+        dst_key: ${{ secrets.GITEE_PRIVATE_KEY }} # 必选，Gitee公钥对应的私钥，https://gitee.com/profile/sshkeys
+        dst_token:  ${{ secrets.GITEE_TOKEN }} # 必选，Gitee对应的用于创建仓库的token，https://gitee.com/profile/personal_access_tokens
+        account_type: user # 如果是组织，指定组织即可，默认为用户user
+        timeout: 600 # git 命令超时时间
+        debug: true # 测试用，正常可以关掉
+        force_update: true # 强制推送到 dst 仓库
+        white_list: "test2,community.applications" # 白名单机制，可以用于更新某些指定库
