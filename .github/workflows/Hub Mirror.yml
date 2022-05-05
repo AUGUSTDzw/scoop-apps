@@ -6,8 +6,8 @@ on:
   pull_request: # 有 pull_request 代码的时候会执行
     branches: [ master ]
   schedule: 
-    # 每3个小时跑一次
-    - cron:  '0 */3 * * *'
+    # 每个小时跑一次
+    - cron:  '0 */1 * * *'
 
 jobs:
   build:
