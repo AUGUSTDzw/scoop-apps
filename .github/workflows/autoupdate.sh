@@ -1,8 +1,8 @@
 #!/bin/bash
 ###
- # @Author: zzz
- # @Date: 2021-03-03 05:13:39
-# LastEditTime: 2021-12-06 17:15:12
+ # @Author: Awow
+ # @Date: 2022-05-05 20:15:00
+# LastEditTime: @Date: 2022-05-05 20:15:00
  # @Description: autoupdate bucket:scoop-apps
  # @FilePath: /data/scoop-apps/autoupdate.sh
 ### 
@@ -18,7 +18,7 @@ sudo apt-get -y update && sudo apt-get -y install jq recode sqlite3
 
 # init scoop-zapps
 init_scoop-zapps(){
-    git clone --depth=1 https://github.com/kkzzhizhou/scoop-zapps  ${cache_dir}/scoop-zapps
+    git clone --depth=1 https://github.com/AUGUSTDzw/scoop-zapps  ${cache_dir}/scoop-zapps
     files=$(find ${cache_dir}/scoop-zapps -type f -name *.json -not -path "${cache_dir}/scoop-zapps/.vscode/*")
     for file in ${files[@]}
     do
@@ -30,7 +30,7 @@ init_scoop-zapps(){
             # record file_id
             echo $file_id >> ${cache_dir}/file_ids
         fi
-        add_to_bucket "$file" "${file_name}" "kkzzhizhou/scoop-zapps" 
+        add_to_bucket "$file" "${file_name}" "AUGUSTDzw/scoop-zapps" 
         # record file_md5
         echo $file_md5 >> ${cache_dir}/file_md5
     done
@@ -48,7 +48,7 @@ gen_bucket_config(){
             sqlite3 ./scoop_directory.db "UPDATE buckets SET updated = '$date_recode' where id = $i"
         done
         check_date=$(date +"%y-%m-%d" -d '1 month ago')
-        bucket_urls=$(sqlite3 ./scoop_directory.db "select bucket_url from buckets where packages >= 10 and stars >= 5 and updated > '$check_date' and bucket_url not like '%ScoopInstaller/Main%' and bucket_url not like '%kkzzhizhou/scoop-zapps%' order by stars desc, updated desc, stars desc")
+        bucket_urls=$(sqlite3 ./scoop_directory.db "select bucket_url from buckets where packages >= 10 and stars >= 5 and updated > '$check_date' and bucket_url not like '%ScoopInstaller/Main%' and bucket_url not like '%AUGUSTDzw/scoop-zapps%' order by stars desc, updated desc, stars desc")
         for bucket_url in ${bucket_urls[@]}; do
             bucket_name=$(echo $bucket_url | awk -F'/' '{print $(NF-1)"/"$NF}')
             echo "add bucket:$bucket_name"
