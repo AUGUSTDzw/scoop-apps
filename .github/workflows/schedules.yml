@@ -1,10 +1,10 @@
 name: 'AutoUpdate'
  
 on:
-  repository_dispatch:
-  workflow_dispatch:
-  schedule:
-    - cron: '0 4 * * *'
+  # repository_dispatch:
+  # workflow_dispatch:
+  # schedule:
+  # - cron: '0 4 * * *'
 
 jobs:
   bot:
